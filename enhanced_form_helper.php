@@ -59,32 +59,38 @@
 
             $response .= '>';
             
-            if (is_array($options))
+            if (!empty($options) && is_array($options))
             {
-                foreach($options as $option)
+                foreach($options as $key => $option)
                 {
                     if (is_object($option))
                     {
                         if ($selected != false && is_array($selected))
                         {
-                            if (in_array($option->{$vfield}, $selected))
+                            if ((isset($option->{$vfield}) && !empty($option->{$vfield})) && (isset($option->{$nfield}) && !empty($option->{$nfield})))
                             {
-                                $response .= '<option value="'.$option->{$vfield}.'" selected>'.$option->{$nfield}.'</option>';
-                            }
-                            else 
-                            {
-                                $response .= '<option value="'.$option->{$vfield}.'">'.$option->{$nfield}.'</option>';
+                                if (in_array($option->{$vfield}, $selected))
+                                {
+                                    $response .= '<option value="'.$option->{$vfield}.'" selected>'.$option->{$nfield}.'</option>';
+                                }
+                                else 
+                                {
+                                    $response .= '<option value="'.$option->{$vfield}.'">'.$option->{$nfield}.'</option>';
+                                }
                             }
                         }
                         else 
                         {
-                            if ($selected == $option->{$vfield})
+                            if ((isset($option->{$vfield}) && !empty($option->{$vfield})) && (isset($option->{$nfield}) && !empty($option->{$nfield})))
                             {
-                                $response .= '<option value="'.$option->{$vfield}.'" selected>'.$option->{$nfield}.'</option>';
-                            }
-                            else 
-                            {
-                                $response .= '<option value="'.$option->{$vfield}.'">'.$option->{$nfield}.'</option>';
+                                if ($selected == $option->{$vfield})
+                                {
+                                    $response .= '<option value="'.$option->{$vfield}.'" selected>'.$option->{$nfield}.'</option>';
+                                }
+                                else 
+                                {
+                                    $response .= '<option value="'.$option->{$vfield}.'">'.$option->{$nfield}.'</option>';
+                                }
                             }
                         }
                     }
@@ -96,22 +102,34 @@
                             {
                                 if (in_array($option, $selected))
                                 {
-                                    $response .= '<option value="'.$option.'" selected>'.$option.'</option>';
+                                    if (!empty($option))
+                                    {
+                                        $response .= '<option value="'.$option.'" selected>'.$option.'</option>';   
+                                    }
                                 }
                                 else 
                                 {
-                                    $response .= '<option value="'.$option.'">'.$option.'</option>';
+                                    if (!empty($option))
+                                    {
+                                        $response .= '<option value="'.$option.'">'.$option.'</option>';   
+                                    }
                                 }
                             }
-                            else 
-                            {
+                            else
+                            {                                
                                 if ($selected == $option)
                                 {
-                                    $response .= '<option value="'.$option.'" selected>'.$option.'</option>';
+                                    if (!empty($option))
+                                    {
+                                        $response .= '<option value="'.$option.'" selected>'.$option.'</option>';   
+                                    }
                                 }
                                 else
                                 {
-                                    $response .= '<option value="'.$option.'">'.$option.'</option>';
+                                    if (!empty($option))
+                                    {
+                                        $response .= '<option value="'.$option.'">'.$option.'</option>';   
+                                    }
                                 }
                             }
                         }
@@ -119,24 +137,36 @@
                         {
                             if ($selected != false && is_array($selected))
                             {
-                                if (in_array($option[$vfield], $selected))
+                                if (in_array($key, $selected))
                                 {
-                                    $response .= '<option value="'.$option[$vfield].'" selected>'.$option[$nfield].'</option>';
+                                    if (!empty($key) && !empty($option))
+                                    {
+                                        $response .= '<option value="'.$key.'" selected>'.$option.'</option>';   
+                                    }
                                 }
                                 else 
                                 {
-                                    $response .= '<option value="'.$option[$vfield].'">'.$option[$nfield].'</option>';
+                                    if (!empty($key) && !empty($option))
+                                    {
+                                        $response .= '<option value="'.$key.'">'.$option.'</option>';   
+                                    }
                                 }
                             }
                             else 
                             {
-                                if ($selected == $option[$vfield])
+                                if ($selected == $key)
                                 {
-                                    $response .= '<option value="'.$option[$vfield].'" selected>'.$option[$nfield].'</option>';
+                                    if (!empty($key) && !empty($option))
+                                    {
+                                        $response .= '<option value="'.$key.'" selected>'.$option.'</option>';   
+                                    }
                                 }
                                 else 
                                 {
-                                    $response .= '<option value="'.$option[$vfield].'">'.$option[$nfield].'</option>';
+                                    if (!empty($key) && !empty($option))
+                                    {
+                                        $response .= '<option value="'.$key.'">'.$option.'</option>';   
+                                    }
                                 }
                             }
                         }
